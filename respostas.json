@@ -434,6 +434,12 @@
                 "resposta": "Ele pode segunda atarde\n13:43",
                 "horario_preferido": "Segunda-feira, Tarde",
                 "status": "capturado_do_historico"
+            },
+            {
+                "timestamp": "2025-08-15 10:23:09",
+                "resposta": "Obrigado! \nMês de março, pago! \nSuênia - Mãe do aluno Cleyton Nunes\nPagamento: 01/04/25 - $144,44 / referente a parcela de Março.\n\nIrei gerar um recibo de quitação aí no sábado a senhora ou seu esposo assinam!",
+                "horario_preferido": null,
+                "status": "respondido"
             }
         ],
         "mensagem_enviada": true,
@@ -627,6 +633,12 @@
                 "horario_preferido": "Segunda-feira, Terça-feira, Quarta-feira",
                 "status": "capturado_do_historico",
                 "relevante": true
+            },
+            {
+                "timestamp": "2025-08-15 10:23:43",
+                "resposta": "Olá, Isabella! Tudo bem?\nVocê está com aulas pendentes das seguintes datas: 19/07, 26/07.\nHorários disponíveis para reposição (18 a 22 de agosto):\nSegunda-feira:\nTerça-feira:\nQuarta-feira:\nPor favor, me informe quais desses horários seriam melhores para você.\nAguardo seu retorno!\n— Erick Oliveira | Você+ Digital",
+                "horario_preferido": "Segunda-feira, Terça-feira, Quarta-feira",
+                "status": "respondido"
             }
         ],
         "mensagem_enviada": true,
@@ -1408,6 +1420,12 @@
                 "horario_preferido": null,
                 "status": "resposta_pos_bot",
                 "relevante": true
+            },
+            {
+                "timestamp": "2025-08-15 10:26:55",
+                "resposta": "Pronto João vamos aguardar até dia 30/08 tudo certo ?",
+                "horario_preferido": null,
+                "status": "respondido"
             }
         ],
         "mensagem_enviada": true,

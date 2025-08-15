@@ -1,2 +1,5 @@
-# requirements.txt
-pywhatkit==5.4
+# Dependências para o Bot de Reposição de Aulas
+# Versões testadas e compatíveis com Windows
+selenium>=4.10.0,<4.16.0
+webdriver-manager>=3.8.6,<4.0.0
+pywhatkit>=5.4

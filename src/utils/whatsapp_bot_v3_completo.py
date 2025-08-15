@@ -3,33 +3,74 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, WebDriverException
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import json
+import os
+import sys
 from datetime import datetime
 from dados_alunos import ALUNOS_DADOS
 
 class WhatsAppBot:
     def __init__(self):
-        # Configurar opções do Chrome
-        chrome_options = Options()
-        chrome_options.add_argument("--start-maximized")
-        chrome_options.add_argument("--disable-notifications")
-        chrome_options.add_argument("--disable-gpu")
-        chrome_options.add_argument("--no-sandbox")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
-        
-        # Inicializar o driver com as opções
-        service = Service(ChromeDriverManager().install())
-        self.driver = webdriver.Chrome(service=service, options=chrome_options)
-        self.wait = WebDriverWait(self.driver, 45)
-        self.respostas = {}
-        self.carregar_respostas()
-        
+        try:
+            # Configurar opções do Chrome
+            chrome_options = Options()
+            chrome_options.add_argument("--start-maximized")
+            chrome_options.add_argument("--disable-notifications")
+            chrome_options.add_argument("--disable-gpu")
+            chrome_options.add_argument("--no-sandbox")
+            chrome_options.add_argument("--disable-dev-shm-usage")
+            chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
+            chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+            
+            # Tentar diferentes métodos de inicialização
+            self.driver = None
+            
+            # Método 1: Usar webdriver-manager (recomendado)
+            try:
+                print("🔧 Inicializando Chrome com webdriver-manager...")
+                service = Service(ChromeDriverManager().install())
+                self.driver = webdriver.Chrome(service=service, options=chrome_options)
+                print("✅ Chrome inicializado com sucesso!")
+            except Exception as e1:
+                print(f"⚠️ Método 1 falhou: {e1}")
+                
+                # Método 2: Tentar usar Chrome diretamente
+                try:
+                    print("🔧 Tentando usar Chrome diretamente...")
+                    self.driver = webdriver.Chrome(options=chrome_options)
+                    print("✅ Chrome inicializado diretamente!")
+                except Exception as e2:
+                    print(f"⚠️ Método 2 falhou: {e2}")
+                    
+                    # Método 3: Usar caminho específico do Chrome
+                    try:
+                        print("🔧 Tentando usar caminho específico do Chrome...")
+                        chrome_options.binary_location = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+                        self.driver = webdriver.Chrome(options=chrome_options)
+                        print("✅ Chrome inicializado com caminho específico!")
+                    except Exception as e3:
+                        print(f"❌ Todos os métodos falharam. Erro final: {e3}")
+                        print("\n🔧 SOLUÇÕES POSSÍVEIS:")
+                        print("1. Verifique se o Google Chrome está instalado")
+                        print("2. Atualize o Chrome para a versão mais recente")
+                        print("3. Execute: pip install --upgrade selenium webdriver-manager")
+                        print("4. Reinicie o terminal/PowerShell")
+                        sys.exit(1)
+            
+            self.wait = WebDriverWait(self.driver, 45)
+            self.respostas = {}
+            self.carregar_respostas()
+            
+        except Exception as e:
+            print(f"❌ Erro crítico na inicialização: {e}")
+            print("🔧 Verifique se o Chrome está instalado e atualizado")
+            sys.exit(1)
+    
     def carregar_respostas(self):
         try:
             with open('respostas.json', 'r', encoding='utf-8') as f:
